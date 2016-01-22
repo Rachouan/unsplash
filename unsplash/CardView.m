@@ -26,7 +26,7 @@
         // Initialization code
         self.backgroundColor = [UIColor colorWithRed:0.184  green:0.251  blue:0.345 alpha:1];
         
-        
+        self.liked = false;
         
         dispatch_async(dispatch_get_global_queue(0,0), ^{
             NSData * data = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: img]];
@@ -79,15 +79,23 @@
     UITapGestureRecognizer *tap =
     [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(likeImageHandler:)];
     [self.likebtn addGestureRecognizer:tap];
-    
-    [self addSubview:self.likebtn];
     self.likebtn.image = [self.likebtn.animationImages objectAtIndex:0];
+    [self addSubview:self.likebtn];
+    
 }
 
 - (void)likeImageHandler:(UITapGestureRecognizer *)recognizer  {
-    UIImageView *imageView = (UIImageView *)recognizer.view;
     
-    [self.likebtn startAnimating];
+    
+    if(!self.liked){
+        self.likebtn.image = [self.likebtn.animationImages objectAtIndex:self.likebtn.animationImages.count-1];
+        [self.likebtn startAnimating];
+    }else{
+        self.likebtn.image = [self.likebtn.animationImages objectAtIndex:0];
+    }
+    
+    self.liked = !self.liked;
+    
 }
 
 

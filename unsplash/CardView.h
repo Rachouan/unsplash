@@ -10,6 +10,7 @@
 
 @interface CardView : UIView
 @property(nonatomic,strong) UIImageView * likebtn;
+@property Boolean liked;
 
 - (id)initWithTitle:(NSString * )titel andImage:(NSString *)img andSubTitle:(NSString*)subtitle andFrame:(CGRect)frame;
 
