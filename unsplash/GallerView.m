@@ -26,7 +26,7 @@
         // Initialization code
         
         
-        self.backgroundColor = [UIColor colorWithRed:0.110  green:0.161  blue:0.216 alpha:1];
+        self.backgroundColor = [UIColor blackColor];
         
         
         
@@ -111,8 +111,9 @@
 }
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    NSLog(@"%lu",(self.photos.count * (self.part-1))-1);
     int page = scrollView.contentOffset.x / scrollView.frame.size.width;
-    if(page >= (self.photos.count * self.part)-1){
+    if(page >= (self.photos.count * (self.part-1))-1){
         self.scrollVW.contentSize = CGSizeMake(self.xPos+scrollView.frame.size.width, 0);
         [self loadGallery];
     }
