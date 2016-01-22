@@ -72,7 +72,8 @@
         
         if(!error){
             for (NSDictionary *dict in loadedData) {
-                Photo *photo = [PhotoFactory createPhotoFromDirectory:dict];
+                Photo *photo = [PhotoFactory createPhotoFromDirectory:dict andFrame:self.frame.size.height];
+                NSLog(@"%@",photo.imageurl);
                 [self.photos addObject:photo];
             }
             

@@ -10,12 +10,19 @@
 
 @implementation PhotoFactory
 
-+ (Photo*)createPhotoFromDirectory:(NSDictionary*)dict{
++ (Photo*)createPhotoFromDirectory:(NSDictionary*)dict andFrame:(CGFloat )screenHeight{
     
     Photo *photo = [[Photo alloc] init];
     
     photo.identifier = [dict objectForKey:@"id"];
-    photo.imageurl = [[dict objectForKey:@"urls"] objectForKey:@"regular"];
+    
+    NSString *cropString = @"crop=entropy&h=";
+    cropString = [cropString stringByAppendingString:[NSString stringWithFormat:@"%f",screenHeight]];
+    
+    NSString *url = [[dict objectForKey:@"urls"] objectForKey:@"regular"];
+    url = [url stringByReplacingOccurrencesOfString:@"crop=entropy&w=1080"
+                                         withString:cropString];
+    photo.imageurl = url;
     
     return photo;
 }
